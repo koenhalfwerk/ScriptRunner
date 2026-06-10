@@ -19,7 +19,7 @@ class PowerShellWorker:
                 pass
 
         self.proc = subprocess.Popen(
-            ["powershell", "-NoLogo", "-NoExit", "-Command", "-"],
+            ["pwsh", "-NoLogo", "-NoExit", "-Command", "-"],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
