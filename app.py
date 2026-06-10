@@ -1,6 +1,7 @@
 import os
 import json
 import datetime
+import threading
 from flask import Flask, render_template, request, jsonify
 from ps_worker import PowerShellWorker
 
@@ -12,12 +13,14 @@ SCRIPT_DIR = "scripts"
 LOG_FILE = "logs/app.log"
 
 _ps = None
+_ps_lock = threading.Lock()
 
 def get_ps():
     global _ps
-    if _ps is None:
-        log("Initializing PowerShell Worker...")
-        _ps = PowerShellWorker()
+    with _ps_lock:
+        if _ps is None:
+            log("Initializing PowerShell Worker...")
+            _ps = PowerShellWorker()
     return _ps
 
 
@@ -202,4 +205,4 @@ def run(id):
 if __name__ == "__main__":
     os.makedirs("logs", exist_ok=True)
     print("Use waitress to run this app in production.")
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host="127.0.0.1", debug=True, port=5000)

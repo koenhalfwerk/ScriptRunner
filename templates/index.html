@@ -65,11 +65,15 @@
         try {
             const resp = await fetch(`/graph/${action}`, { method: 'POST' });
             const data = await resp.json();
+            if (data.output && data.output.trim()) {
+                alert("PowerShell Output:\n" + data.output);
+            }
             updateStatus();
         } catch (e) {
             alert("Action failed: " + e);
             updateStatus();
-        } finally {
+        }
+ finally {
             btnConnect.disabled = false;
             btnDisconnect.disabled = false;
         }
