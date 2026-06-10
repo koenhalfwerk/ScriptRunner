@@ -11,7 +11,14 @@ CONFIG_DIR = "configs"
 SCRIPT_DIR = "scripts"
 LOG_FILE = "logs/app.log"
 
-ps = PowerShellWorker()
+_ps = None
+
+def get_ps():
+    global _ps
+    if _ps is None:
+        log("Initializing PowerShell Worker...")
+        _ps = PowerShellWorker()
+    return _ps
 
 
 def log(message):
@@ -120,7 +127,7 @@ def run_script(config, form_values):
 
         log(f"RUN {config['name']}")
 
-        output = ps.run(script_path, args)
+        output = get_ps().run(script_path, args)
 
         log("OUTPUT: [suppressed]")
 
@@ -149,16 +156,33 @@ def index():
     return render_template("index.html", configs=load_configs())
 
 
+@app.route("/graph/status")
+def graph_status():
+    return jsonify({"status": get_ps().get_status()})
+
+
+@app.route("/graph/connect", methods=["POST"])
+def graph_connect():
+    output = get_ps().connect()
+    return jsonify({"output": output, "status": get_ps().get_status()})
+
+
+@app.route("/graph/disconnect", methods=["POST"])
+def graph_disconnect():
+    output = get_ps().disconnect()
+    return jsonify({"output": output, "status": get_ps().get_status()})
+
+
 @app.route("/form/<id>")
-def form(name):
-    config = next((c for c in load_configs() if c["id"] == name), None)
+def form(id):
+    config = next((c for c in load_configs() if c["id"] == id), None)
     return render_template("form.html", config=config)
 
 
 @app.route("/run/<id>", methods=["POST"])
-def run(name):
+def run(id):
     try:
-        config = next((c for c in load_configs() if c["id"] == name), None)
+        config = next((c for c in load_configs() if c["id"] == id), None)
 
         if not config:
             return jsonify({"stderr": "Config not found", "exit_code": 1}), 404

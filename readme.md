@@ -127,7 +127,7 @@ Notes:
 
 1. Download Python from https://www.python.org/downloads/
 2. Run the installer
-3. ✅ Make sure to check "Add Python to PATH"
+3. Make sure to check "Add Python to PATH"
 4. Verify installation:
 
    ```powershell

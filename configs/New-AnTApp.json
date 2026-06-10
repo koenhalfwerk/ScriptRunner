@@ -29,16 +29,10 @@
       "default": "OIDC"
     },
     {
-      "name": "Ticketnumber",
-      "label": "Ticketnumber",
-      "type": "text",
-      "required": true
-    },
-    {
       "name": "Notes",
       "label": "Notes",
       "type": "text",
-      "required": false
+      "required": true
     }
   ]
 }

@@ -11,7 +11,17 @@
 <body class="bg-light">
 
 <div class="container mt-5">
-    <h1 class="mb-4">Scripts</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Scripts</h1>
+        
+        <div class="card p-2 shadow-sm">
+            <div class="d-flex align-items-center">
+                <span class="me-3">Graph: <strong id="graph-status">Checking...</strong></span>
+                <button id="btn-connect" class="btn btn-sm btn-success me-2" onclick="graphAction('connect')">Connect</button>
+                <button id="btn-disconnect" class="btn btn-sm btn-danger" onclick="graphAction('disconnect')">Disconnect</button>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         {% for c in configs %}
@@ -29,6 +39,45 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    async function updateStatus() {
+        try {
+            const resp = await fetch('/graph/status');
+            const data = await resp.json();
+            const statusEl = document.getElementById('graph-status');
+            statusEl.innerText = data.status;
+            statusEl.className = data.status === 'Connected' ? 'text-success' : 'text-danger';
+        } catch (e) {
+            console.error("Failed to fetch status", e);
+        }
+    }
+
+    async function graphAction(action) {
+        const statusEl = document.getElementById('graph-status');
+        const btnConnect = document.getElementById('btn-connect');
+        const btnDisconnect = document.getElementById('btn-disconnect');
+        
+        statusEl.innerText = action === 'connect' ? 'Connecting...' : 'Disconnecting...';
+        btnConnect.disabled = true;
+        btnDisconnect.disabled = true;
+
+        try {
+            const resp = await fetch(`/graph/${action}`, { method: 'POST' });
+            const data = await resp.json();
+            updateStatus();
+        } catch (e) {
+            alert("Action failed: " + e);
+            updateStatus();
+        } finally {
+            btnConnect.disabled = false;
+            btnDisconnect.disabled = false;
+        }
+    }
+
+    // Initial check
+    updateStatus();
+</script>
 
 </body>
 </html>
