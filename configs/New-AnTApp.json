@@ -1,0 +1,44 @@
+{
+  "id": "New-AnTApp",
+  "name": "New AnT App",
+  "script": "New-AnTApp.ps1",
+  "parameters": [
+    {
+      "name": "DisplayName",
+      "label": "Display Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "Owners",
+      "label": "Owners",
+      "type": "textarea-array",
+      "placeholder": "Enter one value per line",
+      "default": [
+      ]
+    },
+    {
+      "name": "AppType",
+      "label": "App Type",
+      "type": "select",
+      "options": [
+        "OAuth",
+        "OIDC",
+        "SAML"
+      ],
+      "default": "OIDC"
+    },
+    {
+      "name": "Ticketnumber",
+      "label": "Ticketnumber",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "Notes",
+      "label": "Notes",
+      "type": "text",
+      "required": false
+    }
+  ]
+}

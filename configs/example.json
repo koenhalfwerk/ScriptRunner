@@ -1,0 +1,49 @@
+{
+  "id": "example",
+  "name": "Example",
+  "script": "example",
+  "parameters": [
+    {
+      "name": "displayName",
+      "label": "Display Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "maxResults",
+      "label": "Max Results",
+      "type": "number",
+      "default": 10
+    },
+    {
+      "name": "roles",
+      "label": "Roles",
+      "type": "checkbox-list",
+      "options": [
+        "Reader",
+        "Writer",
+        "Admin"
+      ],
+      "default": [
+        "Reader",
+        "Writer"
+      ]
+    },
+    {
+      "name": "SecretExpiry",
+      "label": "SecretExpiry",
+      "type": "select",
+      "options": [
+        "1year",
+        "2year",
+        "3year"
+      ],
+      "default": "1year"
+    },
+    {
+      "name": "isMultiTenant",
+      "label": "Multi-tenant",
+      "type": "checkbox"
+    }
+  ]
+}

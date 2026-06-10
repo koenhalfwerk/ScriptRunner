@@ -1,0 +1,20 @@
+2026-06-10 10:58:42.084679 - RUN scripts\example -displayName '[''bla'']' -maxResults ['10'] -roles @('['Reader', 'Writer']') -SecretExpiry '[''1year'']'
+2026-06-10 10:58:42.128876 - OUTPUT: REDACTED
+2026-06-10 11:16:56.947219 - RUN scripts\example -displayName '[''bla'']' -maxResults ['10'] -roles @('[''Reader'', ''Writer'']') -SecretExpiry '[''1year'']'
+2026-06-10 11:16:57.066192 - OUTPUT: REDACTED
+2026-06-10 11:18:36.227652 - RUN scripts\example -displayName '['''']' -maxResults ['10'] -roles @('[''Reader'', ''Writer'']') -SecretExpiry '[''1year'']'
+2026-06-10 11:18:36.284766 - OUTPUT: REDACTED
+2026-06-10 11:21:42.873915 - RUN scripts\example -displayName '[''bla'']' -maxResults ['10'] -roles @('[''Reader'', ''Writer'']') -SecretExpiry '[''1year'']'
+2026-06-10 11:21:42.922149 - OUTPUT: REDACTED
+2026-06-10 11:25:27.642991 - RUN Example
+2026-06-10 11:25:27.697409 - OUTPUT: [suppressed]
+2026-06-10 11:25:52.962380 - RUN Example
+2026-06-10 11:25:52.984307 - OUTPUT: [suppressed]
+2026-06-10 11:26:00.400299 - RUN Example
+2026-06-10 11:26:02.444907 - OUTPUT: [suppressed]
+2026-06-10 11:26:08.877620 - RUN Example
+2026-06-10 11:26:08.914347 - OUTPUT: [suppressed]
+2026-06-10 14:24:03.660116 - RUN Example
+2026-06-10 14:24:05.704519 - OUTPUT: [suppressed]
+2026-06-10 15:21:13.560162 - RUN New AnT App
+2026-06-10 15:21:13.562205 - EXCEPTION: [Errno 22] Invalid argument
