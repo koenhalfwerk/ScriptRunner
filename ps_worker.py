@@ -55,6 +55,7 @@ class PowerShellWorker:
     def connect(self):
         with self.lock:
             self._send("Connect-MgGraph -Scopes Application.ReadWrite.All, Directory.ReadWrite.All -NoWelcome")
+            self._send("Write-Output 'CONNECT_DONE'")
             self._send(f"echo {END_MARKER}")
             output = []
             for line in self.proc.stdout:
